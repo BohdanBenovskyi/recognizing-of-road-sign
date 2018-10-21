@@ -1,7 +1,60 @@
-<% if current_user %>
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
-  <%= link_to 'Sign In', new_user_session_path %>
-<% end %>
-<h1>Welcome#index</h1>
+<%= stylesheet_link_tag 'welcome' %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#">Traffic sign recognition</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Traffic signs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About system</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About author</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+    <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
+  </div>
+</nav>
+
+<main>
+  <div class="card" style="width: 18rem;">
+    <%= image_tag("neural_network_main.png", class: 'card-img-top', alt: 'Card image cap') %>
+    <div class="card-body">
+      <h5 class="card-title">Neural networks</h5>
+      <p class="card-text">Artificial neural networks (ANN) or connectionist systems are computing systems vaguely inspired by the...</p>
+      <a href="#" class="btn btn-primary">Get more</a>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <%= image_tag("computer_vision_main.jpg", class: 'card-img-top', alt: 'Card image cap') %>
+    <div class="card-body">
+      <h5 class="card-title">Computer vision</h5>
+      <p class="card-text">Computer vision is an interdisciplinary field that deals with how computers can be made to gain high-level...</p>
+      <a href="#" class="btn btn-primary">Get more</a>
+    </div>
+  </div>
+
+  <div class="card" style="width: 18rem;">
+    <%= image_tag("traffic_sign_recognition_main.jpg", class: 'card-img-top', alt: 'Card image cap') %>
+    <div class="card-body">
+      <h5 class="card-title">Traffic signs recognition</h5>
+      <p class="card-text">Traffic-sign recognition is a technology by which a vehicle is able to recognize...</p>
+      <a href="#" class="btn btn-primary">Get more</a>
+    </div>
+  </div>
+</main>
