@@ -1,0 +1,33 @@
+<%= stylesheet_link_tag 'articles' %>
+
+<h1 class="text-center">Add new article</h1>
+
+<%= form_for @article do |f| %>
+  <table align="center">
+    <tbody>
+      <tr>
+        <td valign="middle">Title</td>
+        <td class="column"><%= f.text_field :title, class: 'form-control' %></td>
+      </tr>
+
+      <tr>
+        <td valign="middle">Preview</td>
+        <td class="column"><%= f.text_field :preview, class: 'form-control' %></td>
+      </tr>
+
+      <tr>
+        <td valign="middle">Content</td>
+        <td class="text-field"><%= f.text_area :content, class: 'form-control' %></td>
+      </tr>
+
+      <tr>
+        <td valign="middle">Thumbnail</td>
+        <td class="column"><%= f.text_field :thumbnail, class: 'form-control' %></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="flex-container">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>
