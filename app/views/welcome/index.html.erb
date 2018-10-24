@@ -31,30 +31,49 @@
 </nav>
 
 <main>
-  <div class="card" style="width: 18rem;">
-    <%= image_tag("neural_network_main.png", class: 'card-img-top', alt: 'Card image cap') %>
-    <div class="card-body">
-      <h5 class="card-title">Neural networks</h5>
-      <p class="card-text">Artificial neural networks (ANN) or connectionist systems are computing systems vaguely inspired by the...</p>
-      <a href="#" class="btn btn-primary">Get more</a>
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem;">
-    <%= image_tag("computer_vision_main.jpg", class: 'card-img-top', alt: 'Card image cap') %>
-    <div class="card-body">
-      <h5 class="card-title">Computer vision</h5>
-      <p class="card-text">Computer vision is an interdisciplinary field that deals with how computers can be made to gain high-level...</p>
-      <a href="#" class="btn btn-primary">Get more</a>
-    </div>
-  </div>
-
-  <div class="card" style="width: 18rem;">
-    <%= image_tag("traffic_sign_recognition_main.jpg", class: 'card-img-top', alt: 'Card image cap') %>
-    <div class="card-body">
-      <h5 class="card-title">Traffic signs recognition</h5>
-      <p class="card-text">Traffic-sign recognition is a technology by which a vehicle is able to recognize...</p>
-      <a href="#" class="btn btn-primary">Get more</a>
-    </div>
+  <div class="row">
+    <% @articles.each do |article| %>
+      <div class="col-sm-3">
+        <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+          <div class="auto-sized">
+            <%= image_tag(article.thumbnail, class: 'card-img-top', alt: 'Card image cap') %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= article.title %></h5>
+            <p class="card-text"><%= article.preview %></p>
+          </div>
+          <a href="<%= article_path(article.id) %>" class="btn btn-primary">Get more</a>
+        </div>
+      </div>
+    <% end %>
   </div>
 </main>
+
+<% if current_user.present? && current_user.is_admin %>
+  <div>
+    <%= link_to 'Add new article', new_article_path, class: 'btn btn-primary' %>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <td>Id</td>
+        <td>Title</td>
+        <td>Thumbnail</td>
+        <td>Edit</td>
+        <td>Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.thumbnail %></td>
+          <td></td>
+          <td><%= link_to 'Delete', article_path(article.id), class: 'btn btn-danger',method: :delete, data: {confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
