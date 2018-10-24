@@ -1,0 +1,20 @@
+<%= stylesheet_link_tag 'articles' %>
+
+<div class="card text-white bg-dark mb-3">
+  <table>
+    <tr>
+      <td>
+        <%= image_tag(@article.thumbnail, class: 'card-img-top', alt: 'Card image cap') %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="card-body">
+          <h5 class="card-title"><%= @article.title %></h5>
+          <p class="card-text"><%= @article.content %></p>
+          <p class="card-text"><small class="text-muted"><%= @article.updated_at %></small></p>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
