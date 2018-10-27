@@ -7,6 +7,8 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 gem 'carrierwave'
+gem 'debug_inspector', '~> 0.0.2'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
