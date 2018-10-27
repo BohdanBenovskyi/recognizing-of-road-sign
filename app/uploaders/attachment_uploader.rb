@@ -1,4 +1,5 @@
 class AttachmentUploader < CarrierWave::Uploader::Base
+  require 'debug_inspector'
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
@@ -10,7 +11,18 @@ class AttachmentUploader < CarrierWave::Uploader::Base
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    #"uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{find_current_user.email}"
+  end
+
+  def find_current_user
+    (1..Kernel.caller.length).each do |n|
+      RubyVM::DebugInspector.open do |i|
+        current_user = eval "current_user rescue nil", i.frame_binding(n)
+        return current_user unless current_user.nil?
+      end
+    end
+    return nil
   end
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
