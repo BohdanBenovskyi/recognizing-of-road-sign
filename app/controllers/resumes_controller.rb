@@ -1,6 +1,6 @@
 class ResumesController < ApplicationController
   def index
-    @resumes = Resume.all
+    @resumes = current_user.resumes.all
   end
 
   def new
@@ -8,7 +8,7 @@ class ResumesController < ApplicationController
   end
 
   def create
-    @resume = Resume.new(resume_params)
+    @resume = Resume.new(resume_params.merge(user_id: current_user.id))
 
     if @resume.save
       redirect_to resumes_path, notice: "The resume #{@resume.name} has been uploaded."
