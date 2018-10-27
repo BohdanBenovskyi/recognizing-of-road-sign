@@ -54,14 +54,14 @@
     <%= link_to 'Add new article', new_article_path, class: 'btn btn-primary' %>
   </div>
 
-  <table>
+  <table class="table table-hover table-dark">
     <thead>
       <tr>
-        <td>Id</td>
-        <td>Title</td>
-        <td>Thumbnail</td>
-        <td>Edit</td>
-        <td>Delete</td>
+        <td scope="col">Id</td>
+        <td scope="col">Title</td>
+        <td scope="col">Thumbnail</td>
+        <td scope="col">Edit</td>
+        <td scope="col">Delete</td>
       </tr>
     </thead>
     <tbody>
@@ -70,7 +70,7 @@
           <td><%= article.id %></td>
           <td><%= article.title %></td>
           <td><%= article.thumbnail %></td>
-          <td></td>
+          <td><%= link_to 'Edit', edit_article_path(article.id), class: 'btn btn-warning' %></td>
           <td><%= link_to 'Delete', article_path(article.id), class: 'btn btn-danger',method: :delete, data: {confirm: "Are you sure?"} %></td>
         </tr>
       <% end %>
