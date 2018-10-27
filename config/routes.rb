@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get 'welcome/index'
   root 'welcome#index'
 
-  resources :articles, only: [:new, :show, :create, :destroy]
+  resources :articles, only: [:new, :show, :create, :edit, :update, :destroy]
 end
