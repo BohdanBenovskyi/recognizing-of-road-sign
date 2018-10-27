@@ -1,1 +1,48 @@
 @import "bootstrap";
+
+.btn.btn-primary{
+  margin: 10px;
+}
+
+.text-center{
+  text-align: center;
+}
+
+.row{
+  margin: 20px;
+  justify-content: center;
+}
+
+.card{
+  height: 500px;
+  width: 300px;
+
+}
+.card-title{
+  text-align: center;
+}
+
+.card-text{
+  text-align: justify;
+}
+
+.auto-sized{
+  width: 100%;
+  height: 250px;
+}
+
+.card-img-top{
+  width: 100%;
+  height: 100%;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  a{
+    margin: 10px;
+  }
+  bottom: 10px;
+}

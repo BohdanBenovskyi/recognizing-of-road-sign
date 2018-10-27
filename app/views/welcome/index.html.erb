@@ -1,7 +1,79 @@
-<% if current_user %>
-  <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
-<% else %>
-  <%= link_to 'Sign Up', new_user_registration_path %>
-  <%= link_to 'Sign In', new_user_session_path %>
+<%= stylesheet_link_tag 'welcome' %>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#">Traffic sign recognition</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <%= link_to 'Home', root_path, class: 'nav-link' %>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Traffic signs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About system</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">About author</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary' %>
+    <%= link_to 'Sign In', new_user_session_path, class: 'btn btn-primary' %>
+  </div>
+</nav>
+
+<main>
+  <div class="row">
+    <% @articles.each do |article| %>
+      <div class="col-sm-3">
+        <div class="card text-white bg-dark mb-3" style="width: 18rem;">
+          <div class="auto-sized">
+            <%= image_tag(article.thumbnail, class: 'card-img-top', alt: 'Card image cap') %>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title"><%= article.title %></h5>
+            <p class="card-text"><%= article.preview %></p>
+          </div>
+          <a href="<%= article_path(article.id) %>" class="btn btn-primary">Get more</a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>
+
+<% if current_user.present? && current_user.is_admin %>
+  <div>
+    <%= link_to 'Add new article', new_article_path, class: 'btn btn-primary' %>
+  </div>
+
+  <table class="table table-hover table-dark">
+    <thead>
+      <tr>
+        <td scope="col">Id</td>
+        <td scope="col">Title</td>
+        <td scope="col">Thumbnail</td>
+        <td scope="col">Edit</td>
+        <td scope="col">Delete</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.id %></td>
+          <td><%= article.title %></td>
+          <td><%= article.thumbnail %></td>
+          <td><%= link_to 'Edit', edit_article_path(article.id), class: 'btn btn-warning' %></td>
+          <td><%= link_to 'Delete', article_path(article.id), class: 'btn btn-danger',method: :delete, data: {confirm: "Are you sure?"} %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <% end %>
-<h1>Welcome#index</h1>
