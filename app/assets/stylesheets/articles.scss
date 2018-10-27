@@ -13,3 +13,22 @@
 .card-text{
   text-align: justify;
 }
+
+#article_content{
+  height: 300px;
+  width: 500px;
+}
+
+.flex-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  a{
+    margin: 10px;
+  }
+}
+
+.btn.btn-primary{
+  margin: 10px;
+}
