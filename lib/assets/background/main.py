@@ -163,7 +163,7 @@ def findSigns(image, contours, threshold, distance_theshold):
             coordinates.append([(top-2,left-2),(right+1,bottom+1)])
     return signs, coordinates
 
-def localization(image, min_size_components, similitary_contour_with_circle, model, count, current_sign_type, file_bin_path, file_class_path):
+def localization(image, min_size_components, similitary_contour_with_circle, model, count, current_sign_type, file_bin_path):
     original_image = image.copy()
     binary_image = preprocess_image(image)
 
@@ -173,7 +173,7 @@ def localization(image, min_size_components, similitary_contour_with_circle, mod
 
     cv2.imwrite(os.path.join(file_bin_path, str(count)+'_'+'binary_image'+'.png'), binary_image)
 
-    cv2.imshow('BINARY IMAGE', binary_image)
+    #cv2.imshow('BINARY IMAGE', binary_image)
     contours = findContour(binary_image)
     #signs, coordinates = findSigns(image, contours, similitary_contour_with_circle, 15)
     sign, coordinate = findLargestSign(original_image, contours, similitary_contour_with_circle, 15)
@@ -186,7 +186,6 @@ def localization(image, min_size_components, similitary_contour_with_circle, mod
         sign_type = getLabel(model, sign)
         sign_type = sign_type if sign_type <= 8 else 8
         text = SIGNS[sign_type]
-        cv2.imwrite(os.path.join(file_class_path, str(count)+'_'+text+'.png'), sign)
 
     if sign_type > 0 and sign_type != current_sign_type:        
         cv2.rectangle(original_image, coordinate[0],coordinate[1], (0, 255, 0), 1)
@@ -284,7 +283,7 @@ def main(args):
 
         print("Frame:{}".format(count))
         #image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
-        coordinate, image, sign_type, text = localization(frame, args.min_size_components, args.similitary_contour_with_circle, model, count, current_sign, args.bin_img_path, args.class_img_path)
+        coordinate, image, sign_type, text = localization(frame, args.min_size_components, args.similitary_contour_with_circle, model, count, current_sign, args.bin_img_path)
         if coordinate is not None:
             cv2.rectangle(image, coordinate[0],coordinate[1], (255, 255, 255), 1)
         print("Sign:{}".format(sign_type))
@@ -357,7 +356,8 @@ def main(args):
             sign_count += 1
             coordinates.append(position)
 
-        cv2.imshow('Result', image)
+        #cv2.imshow('Result', image)
+        cv2.imwrite(os.path.join(args.class_img_path, str(count)+'_result_image'+'.png'), image)
         count = count + 1
         #Write to video
         out.write(image)
